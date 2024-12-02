@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import Swal from "sweetalert2";
 
 const NewUser = () => {
@@ -20,13 +20,25 @@ const NewUser = () => {
       return;
     }
 
-    console.log(name, email, gender, status);
+    const newUser = { name, email, gender, status };
+    //console.log(newUser);
 
-    Swal.fire({
-      icon: "success",
-      title: "User Added!",
-      text: `New user ${name} added successfully.`,
-    });
+    fetch("http://localhost:5000/user", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newUser),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        Swal.fire({
+          icon: "success",
+          title: "User Added!",
+          text: `New user ${name} added successfully.`,
+        });
+      });
 
     // Clear the form
     form.reset();
