@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const AllUsers = () => {
-  // Sample user data
+
   const data = useLoaderData();
   const [users, setUsers] = useState(data);
 
@@ -36,7 +36,8 @@ const AllUsers = () => {
         </h2>
         <div className="text-right mb-4">
           <button className="px-4 py-2 bg-teal-600 text-white rounded-lg">
-            New User
+            {" "}
+            <Link to="/add">New User</Link>
           </button>
         </div>
         <table className="w-full table-auto text-center border-collapse">

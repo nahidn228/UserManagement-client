@@ -1,4 +1,6 @@
+import "animate.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const NewUser = () => {
@@ -10,6 +12,7 @@ const NewUser = () => {
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
+    const photo = form.photo.value;
 
     if (!name || !email) {
       Swal.fire({
@@ -20,7 +23,7 @@ const NewUser = () => {
       return;
     }
 
-    const newUser = { name, email, gender, status };
+    const newUser = { name, email,photo, gender, status };
     //console.log(newUser);
 
     fetch("http://localhost:5000/user", {
@@ -46,7 +49,11 @@ const NewUser = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-teal-500 via-cyan-500 to-blue-500 flex items-center justify-center p-6">
-      <div className="w-full max-w-2xl bg-white rounded-lg shadow-lg p-8">
+      <div className="w-full max-w-4xl bg-white rounded-lg shadow-lg p-8 animate__animated animate__fadeInUp">
+        <button className="absolute top-4 right-4 py-2 px-4 bg-teal-700 text-white rounded-lg shadow-md hover:bg-teal-600 transition-all duration-300">
+          {" "}
+          <Link to="/users">All Users</Link>
+        </button>
         <h2 className="text-3xl font-bold text-center text-teal-700 mb-6">
           New User
         </h2>
@@ -85,6 +92,25 @@ const NewUser = () => {
                 name="email"
                 id="email"
                 placeholder="Enter email address"
+                required
+                className="w-full focus:outline-none bg-transparent"
+              />
+            </div>
+          </div>
+          {/* Image Field */}
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Image Url
+            </label>
+            <div className="flex items-center border rounded-lg mt-2 p-2">
+              <input
+                type="text"
+                name="photo"
+                id="photo"
+                placeholder="Enter Image Url"
                 required
                 className="w-full focus:outline-none bg-transparent"
               />
@@ -156,7 +182,7 @@ const NewUser = () => {
           {/* Save Button */}
           <button
             type="submit"
-            className="w-full py-3 bg-gradient-to-r from-teal-700 to-cyan-600 text-white font-bold rounded-lg shadow-md hover:from-teal-600 hover:to-cyan-500 transition-all duration-300"
+            className="w-full py-3 bg-gradient-to-r from-teal-700 to-cyan-600 text-white font-bold rounded-lg shadow-md hover:from-teal-600 hover:to-cyan-500 transition-all duration-300 animate__animated animate__pulse animate__infinite"
           >
             Save
           </button>
