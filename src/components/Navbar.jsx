@@ -18,6 +18,18 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 space-x-4">
           <li>
             <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive
+                  ? "btn btn-outline btn-primary text-white"
+                  : "btn btn-ghost hover:btn-accent"
+              }
+            >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/users"
               className={({ isActive }) =>
                 isActive
@@ -40,18 +52,7 @@ const Navbar = () => {
               Add
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/update"
-              className={({ isActive }) =>
-                isActive
-                  ? "btn btn-outline btn-primary text-white"
-                  : "btn btn-ghost hover:btn-accent"
-              }
-            >
-              Update
-            </NavLink>
-          </li>
+
           <li>
             <NavLink
               to="/signin"
@@ -104,6 +105,16 @@ const Navbar = () => {
           >
             <li>
               <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? "text-primary font-bold" : "hover:text-primary"
+                }
+              >
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
                 to="/users"
                 className={({ isActive }) =>
                   isActive ? "text-primary font-bold" : "hover:text-primary"
@@ -122,16 +133,7 @@ const Navbar = () => {
                 Add
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/update"
-                className={({ isActive }) =>
-                  isActive ? "text-primary font-bold" : "hover:text-primary"
-                }
-              >
-                Update
-              </NavLink>
-            </li>
+
             <li>
               <NavLink
                 to="/signin"

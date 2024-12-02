@@ -1,7 +1,7 @@
 import "animate.css";
 import { useState } from "react";
 import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Home = () => {
@@ -28,8 +28,8 @@ const Home = () => {
           .then((data) => {
             console.log(data);
             if (data.deletedCount > 0) {
-              // const remaining = users.filter((user) => data._id !== user._id);
-              // setUsers(remaining);
+              const remaining = users.filter((user) => user._id !== id);
+              setUsers(remaining);
               Swal.fire({
                 title: "Deleted!",
                 text: "Your User has been deleted.",
@@ -41,7 +41,7 @@ const Home = () => {
     });
   };
   return (
-    <div className=" max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-10 ">
+    <div className=" w-11/12 md:max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-10 ">
       {users.map((user, idx) => (
         <div
           key={idx}
@@ -79,13 +79,14 @@ const Home = () => {
               <FaEye />
               <span>View</span>
             </button>
-            <button
+            <Link
+              to={`/update/${user._id}`}
               className="btn btn-sm btn-ghost text-blue-300 flex items-center space-x-1"
               title="Edit"
             >
               <FaEdit />
               <span>Edit</span>
-            </button>
+            </Link>
             <button
               onClick={() => handleDelete(user._id)}
               className="btn btn-sm btn-ghost text-red-300 flex items-center space-x-1"

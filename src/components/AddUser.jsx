@@ -52,7 +52,7 @@ const NewUser = () => {
       <div className="w-full max-w-4xl bg-white rounded-lg shadow-lg p-8 animate__animated animate__fadeInUp">
         <button className="absolute top-4 right-4 py-2 px-4 bg-teal-700 text-white rounded-lg shadow-md hover:bg-teal-600 transition-all duration-300">
           {" "}
-          <Link to="/users">All Users</Link>
+          <Link to="/">All Users</Link>
         </button>
         <h2 className="text-3xl font-bold text-center text-teal-700 mb-6">
           New User
