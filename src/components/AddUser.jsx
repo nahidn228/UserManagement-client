@@ -23,10 +23,10 @@ const NewUser = () => {
       return;
     }
 
-    const newUser = { name, email,photo, gender, status };
+    const newUser = { name, email, photo, gender, status };
     //console.log(newUser);
 
-    fetch("http://localhost:5000/user", {
+    fetch("https://user-management-server-cyan.vercel.app/user", {
       method: "POST",
       headers: {
         "content-type": "application/json",

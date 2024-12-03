@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import { Link, useLoaderData } from "react-router-dom";
+import {  useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const AllUsers = () => {
@@ -35,10 +35,10 @@ const AllUsers = () => {
           User Management System
         </h2>
         <div className="text-right mb-4">
-          <button className="px-4 py-2 bg-teal-600 text-white rounded-lg">
+          {/* <button className="px-4 py-2 bg-teal-600 text-white rounded-lg">
             {" "}
             <Link to="/add">New User</Link>
-          </button>
+          </button> */}
         </div>
         <table className="w-full table-auto text-center border-collapse">
           <thead>
@@ -46,7 +46,7 @@ const AllUsers = () => {
               <th className="px-4 py-2">ID</th>
               <th className="px-4 py-2">Name</th>
               <th className="px-4 py-2">Email</th>
-              <th className="px-4 py-2">Gender</th>
+              <th className="px-4 py-2">Creation Time</th>
               <th className="px-4 py-2">Status</th>
               <th className="px-4 py-2">Action</th>
             </tr>
@@ -57,7 +57,7 @@ const AllUsers = () => {
                 <td className="px-4 py-2">{idx + 1}</td>
                 <td className="px-4 py-2">{user.name}</td>
                 <td className="px-4 py-2">{user.email}</td>
-                <td className="px-4 py-2">{user.gender}</td>
+                <td className="px-4 py-2">{user.createdAt}</td>
                 <td className="px-4 py-2">{user.status}</td>
                 <td className="px-4 py-2 flex justify-center items-center space-x-2">
                   <button

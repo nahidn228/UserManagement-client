@@ -1,8 +1,13 @@
 import "animate.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaEnvelope, FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { AuthContext } from "../providers/AuthProvider";
 
 const SignIn = () => {
+  const navigate = useNavigate();
+  const { signInUser } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleTogglePassword = () => {
@@ -14,8 +19,29 @@ const SignIn = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password)
-  
+    console.log(email, password);
+
+    signInUser(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        navigate("/");
+
+        Swal.fire({
+          icon: "success",
+          title: `You are successfully Login`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${errorCode}`,
+        });
+      });
   };
 
   return (

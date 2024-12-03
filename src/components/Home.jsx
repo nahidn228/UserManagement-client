@@ -21,7 +21,7 @@ const Home = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         console.log("delete confirm");
-        fetch(`http://localhost:5000/user/${id}`, {
+        fetch(`https://user-management-server-cyan.vercel.app/user/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

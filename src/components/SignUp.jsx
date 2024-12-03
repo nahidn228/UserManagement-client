@@ -1,9 +1,13 @@
 import "animate.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaEnvelope, FaEye, FaEyeSlash, FaLock, FaUser } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../providers/AuthProvider";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const { createUser } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -31,6 +35,42 @@ const SignUp = () => {
       return;
     }
     console.log(name, email, password, confirmPassword);
+
+    createUser(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        navigate("/");
+        Swal.fire({
+          icon: "success",
+          title: "Your account has been created successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
+        const createdAt = user?.metadata?.creationTime;
+        const newUser = { name, email, createdAt };
+
+        fetch("https://user-management-server-cyan.vercel.app/authUser", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${errorCode}`,
+        });
+      });
   };
 
   return (

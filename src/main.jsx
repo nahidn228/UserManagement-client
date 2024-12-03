@@ -9,6 +9,7 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import UpdateUser from "./components/UpdateUser";
 import "./index.css";
+import AuthProvider from "./providers/AuthProvider";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -17,12 +18,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch("http://localhost:5000/user"),
+        loader: () =>
+          fetch("https://user-management-server-cyan.vercel.app/user"),
       },
       {
         path: "/users",
         element: <AllUsers></AllUsers>,
-        loader: () => fetch("http://localhost:5000/user"),
+        loader: () =>
+          fetch("https://user-management-server-cyan.vercel.app/authUser"),
       },
       {
         path: "/add",
@@ -32,7 +35,9 @@ const router = createBrowserRouter([
         path: "/update/:id",
         element: <UpdateUser></UpdateUser>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/user/${params.id}`),
+          fetch(
+            `https://user-management-server-cyan.vercel.app/user/${params.id}`
+          ),
       },
       {
         path: "/signin",
@@ -48,6 +53,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>
 );

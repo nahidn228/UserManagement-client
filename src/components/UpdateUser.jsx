@@ -27,7 +27,7 @@ const UpdateUser = () => {
     const updateUser = { name, email, photo, gender, status };
     //console.log(newUser);
 
-    fetch(`http://localhost:5000/user/${user._id}`, {
+    fetch(`https://user-management-server-cyan.vercel.app/user/${user._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
